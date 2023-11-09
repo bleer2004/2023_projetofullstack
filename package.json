@@ -1,16 +1,21 @@
 {
-  "name": "aula-de-site-completo",
+  "name": "projeto_fullstack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "backend.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
-    "start": "nodemon index.js" 
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon backend.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongobd": "^0.0.1-security.0",
+    "mongodb": "^6.2.0",
+    "mongoose": "^8.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

@@ -25,6 +25,11 @@ async function conectarMongoBD(){
 }
 
 const Filme = mongoose.model ('Filme', mongoose.Schema({
+    async function conectarMongoDB() {
+    await mongoose.connect(`mongodb+srv://pro_mac:mongo123@cluster0.skf8n.mongodb.net/?retryWrites=true&w=majority`);
+}
+
+const Filme = mongoose.model ("Filme", mongoose.Schema({
     titulo: {type: String},
     sinopse: {type: String}
 }))
@@ -40,6 +45,12 @@ app.get('/filmes', async (req, res) => {
 
 //acesso para requisição http-post /filmes, ou seja, vamos inserir um novo filme na lista EEEMMMMM MEMÓÓÓRIA
 app.post ('/filmes', async (req, res) => { //passa a ser uma requisição async e nao mais local
+    const filmes = await Filme.find();
+    res.json(filmes);
+});
+
+//acesso para requisição http-post /filmes, ou seja, vamos inserir um novo filme no banco
+app.post ('/filmes', async (req, res) => {
     //obter dados que serão inseridos
     const titulo = req.body.titulo;
     const sinopse = req.body.sinopse;
@@ -52,6 +63,10 @@ app.post ('/filmes', async (req, res) => { //passa a ser uma requisição async 
     //trazemos do banco a coleção de atualizada
     const filmes = await Filme.find(); //find é do mongoose
     //só para conferir
+    //inserir o novo filme no banco
+    await filme.save();
+    //trazemos do banco a coleção atualizada
+    const filmes = await Filme.find();
     res.json(filmes);
 });
 
@@ -65,3 +80,11 @@ app.listen (3000, () => {
         console.log("erro: " + e);
     }
 });
+    try {
+        conectarMongoDB();
+        console.log("conexão ok e app up & running");
+    }
+    catch (e) {
+        console.log ("erro: ", e);
+    }
+})
